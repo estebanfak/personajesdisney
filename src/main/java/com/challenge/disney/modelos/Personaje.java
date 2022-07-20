@@ -3,6 +3,10 @@ package com.challenge.disney.modelos;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Personaje {
@@ -13,6 +17,8 @@ public class Personaje {
     private String imagen, nombre, historia;
     private int edad;
     private double peso;
+    @OneToMany(mappedBy="personaje", fetch=FetchType.EAGER)
+    private Set<PersonajePelicula> personajePeliculas = new HashSet<>();
 
     public Personaje() {
     }
@@ -57,5 +63,18 @@ public class Personaje {
     }
     public void setPeso(double peso) {
         this.peso = peso;
+    }
+    public Set<PersonajePelicula> getPersonajePeliculas() {
+        return personajePeliculas;
+    }
+    public void setPersonajePeliculas(Set<PersonajePelicula> personajePeliculas) {
+        this.personajePeliculas = personajePeliculas;
+    }
+    public void addPersonajePelicula(PersonajePelicula personajePelicula) {
+        personajePelicula.setPersonaje(this);
+        personajePeliculas.add(personajePelicula);
+    }
+    public Set<Pelicula> getPeliculas(){
+        return personajePeliculas.stream().map(pelicula -> pelicula.getPelicula()).collect(Collectors.toSet());
     }
 }

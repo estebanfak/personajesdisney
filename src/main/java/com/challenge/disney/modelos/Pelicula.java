@@ -2,11 +2,11 @@ package com.challenge.disney.modelos;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Pelicula {
@@ -17,6 +17,8 @@ public class Pelicula {
     private String imagen, titulo;
     private LocalDate fechaCreacion;
     private byte calificacion;
+    @OneToMany(mappedBy="personaje", fetch=FetchType.EAGER)
+    private Set<PersonajePelicula> personajePeliculas = new HashSet<>();
 
     public Pelicula() {
     }
@@ -54,5 +56,18 @@ public class Pelicula {
     }
     public void setCalificacion(byte calificacion) {
         this.calificacion = calificacion;
+    }
+    public Set<PersonajePelicula> getPersonajePeliculas() {
+        return personajePeliculas;
+    }
+    public void setPersonajePeliculas(Set<PersonajePelicula> personajePeliculas) {
+        this.personajePeliculas = personajePeliculas;
+    }
+    public void addPersonajePelicula(PersonajePelicula personajePelicula) {
+        personajePelicula.setPelicula(this);
+        personajePeliculas.add(personajePelicula);
+    }
+    public Set<Personaje> getPersonaje(){
+        return personajePeliculas.stream().map(personaje -> personaje.getPersonaje()).collect(Collectors.toSet());
     }
 }
