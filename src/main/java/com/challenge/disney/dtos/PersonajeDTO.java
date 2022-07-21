@@ -1,6 +1,11 @@
 package com.challenge.disney.dtos;
 
 import com.challenge.disney.modelos.Personaje;
+import com.challenge.disney.modelos.PersonajePelicula;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class PersonajeDTO {
 
@@ -8,6 +13,7 @@ public class PersonajeDTO {
     private String imagen, nombre, historia;
     private int edad;
     private double peso;
+    private Set<String> peliculas = new HashSet<>();
 
     public PersonajeDTO() {
     }
@@ -19,6 +25,7 @@ public class PersonajeDTO {
         this.historia = personaje.getHistoria();
         this.edad = personaje.getEdad();
         this.peso = personaje.getPeso();
+        this.peliculas = personaje.getPersonajePeliculas().stream().map(personajePelicula -> new PersonajePeliculaDTO(personajePelicula).getPelicula()).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -38,5 +45,8 @@ public class PersonajeDTO {
     }
     public double getPeso() {
         return peso;
+    }
+    public Set<String> getPeliculas() {
+        return peliculas;
     }
 }

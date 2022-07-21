@@ -17,8 +17,11 @@ public class Pelicula {
     private String imagen, titulo;
     private LocalDate fechaCreacion;
     private byte calificacion;
-    @OneToMany(mappedBy="personaje", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="pelicula", fetch=FetchType.EAGER)
     private Set<PersonajePelicula> personajePeliculas = new HashSet<>();
+
+    @OneToMany(mappedBy="pelicula", fetch=FetchType.EAGER)
+    private Set<GeneroPelicula> generoPeliculas = new HashSet<>();
 
     public Pelicula() {
     }
@@ -69,5 +72,15 @@ public class Pelicula {
     }
     public Set<Personaje> getPersonaje(){
         return personajePeliculas.stream().map(personaje -> personaje.getPersonaje()).collect(Collectors.toSet());
+    }
+    public Set<GeneroPelicula> getGeneroPeliculas() {
+        return generoPeliculas;
+    }
+    public void setGeneroPeliculas(Set<GeneroPelicula> generoPeliculas) {
+        this.generoPeliculas = generoPeliculas;
+    }
+    public void addGeneroPelicula(GeneroPelicula generoPelicula) {
+        generoPelicula.setPelicula(this);
+        getGeneroPeliculas().add(generoPelicula);
     }
 }

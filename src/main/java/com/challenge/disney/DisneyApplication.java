@@ -31,6 +31,7 @@ public class DisneyApplication {
 			Personaje personaje3 = new Personaje("www.algo2.com", "Mulan", "India", 25, 52);
 			Personaje personaje4 = new Personaje("www.algo3.com", "Simba", "León", 3, 49);
 			Personaje personaje5 = new Personaje("www.algo4.com", "Aladín", "León", 3, 49);
+
 			personajeRepositorio.save(personaje1);
 			personajeRepositorio.save(personaje2);
 			personajeRepositorio.save(personaje3);
@@ -69,6 +70,7 @@ public class DisneyApplication {
 			personajePeliculaRepositorio.save(personajePelicula3);
 			personajePeliculaRepositorio.save(personajePelicula4);
 			personajePeliculaRepositorio.save(personajePelicula5);
+
 
 
 		};
