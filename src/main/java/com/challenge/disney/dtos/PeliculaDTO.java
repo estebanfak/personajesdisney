@@ -13,6 +13,7 @@ public class PeliculaDTO {
     private LocalDate fechaCreacion;
     private byte calificacion;
     private Set<String> personajes = new HashSet<>();
+    private Set<String> generos = new HashSet<>();
 
     public PeliculaDTO() {}
 
@@ -23,6 +24,7 @@ public class PeliculaDTO {
         this.fechaCreacion = pelicula.getFechaCreacion();
         this.calificacion = pelicula.getCalificacion();
         this.personajes = pelicula.getPersonajePeliculas().stream().map(personajePelicula -> new PersonajePeliculaDTO(personajePelicula).getPersonaje()).collect(Collectors.toSet());
+        this.generos = pelicula.getGeneroPeliculas().stream().map(element -> new GeneroPeliculaDTO(element).getGenero()).collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -40,7 +42,10 @@ public class PeliculaDTO {
     public byte getCalificacion() {
         return calificacion;
     }
-    public Set<String> getPersonaje() {
+    public Set<String> getPersonajes() {
         return personajes;
+    }
+    public Set<String> getGeneros() {
+        return generos;
     }
 }

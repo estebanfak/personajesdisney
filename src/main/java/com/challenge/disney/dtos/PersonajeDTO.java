@@ -1,13 +1,13 @@
 package com.challenge.disney.dtos;
 
 import com.challenge.disney.modelos.Personaje;
-import com.challenge.disney.modelos.PersonajePelicula;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PersonajeDTO {
+
 
     private Long id;
     private String imagen, nombre, historia;

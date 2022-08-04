@@ -1,17 +1,12 @@
 package com.challenge.disney;
 
-import com.challenge.disney.modelos.Genero;
-import com.challenge.disney.modelos.Pelicula;
-import com.challenge.disney.modelos.Personaje;
-import com.challenge.disney.modelos.PersonajePelicula;
-import com.challenge.disney.repositorios.GeneroRepositorio;
-import com.challenge.disney.repositorios.PeliculaRepositorio;
-import com.challenge.disney.repositorios.PersonajePeliculaRepositorio;
-import com.challenge.disney.repositorios.PersonajeRepositorio;
+import com.challenge.disney.modelos.*;
+import com.challenge.disney.repositorios.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 import java.time.LocalDate;
 
 
@@ -23,7 +18,7 @@ public class DisneyApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(PersonajeRepositorio personajeRepositorio, PeliculaRepositorio peliculaRepositorio, GeneroRepositorio generoRepositorio, PersonajePeliculaRepositorio personajePeliculaRepositorio){
+	public CommandLineRunner initData(PersonajeRepositorio personajeRepositorio, PeliculaRepositorio peliculaRepositorio, GeneroRepositorio generoRepositorio, PersonajePeliculaRepositorio personajePeliculaRepositorio, GeneroPeliculaRepositorio generoPeliculaRepositorio){
 		return (args) -> {
 
 			Personaje personaje1 = new Personaje("www.algo.com", "Cenicienta", "Se durmió", 21, 50);
@@ -70,6 +65,20 @@ public class DisneyApplication {
 			personajePeliculaRepositorio.save(personajePelicula3);
 			personajePeliculaRepositorio.save(personajePelicula4);
 			personajePeliculaRepositorio.save(personajePelicula5);
+
+			GeneroPelicula generoPelicula1 = new GeneroPelicula(genero1, pelicula1);
+			GeneroPelicula generoPelicula2 = new GeneroPelicula(genero2, pelicula2);
+			GeneroPelicula generoPelicula3 = new GeneroPelicula(genero3, pelicula3);
+			GeneroPelicula generoPelicula4 = new GeneroPelicula(genero4, pelicula4);
+			GeneroPelicula generoPelicula5 = new GeneroPelicula(genero5, pelicula1);
+
+			generoPeliculaRepositorio.save(generoPelicula1);
+			generoPeliculaRepositorio.save(generoPelicula2);
+			generoPeliculaRepositorio.save(generoPelicula3);
+			generoPeliculaRepositorio.save(generoPelicula4);
+			generoPeliculaRepositorio.save(generoPelicula5);
+
+
 
 
 
