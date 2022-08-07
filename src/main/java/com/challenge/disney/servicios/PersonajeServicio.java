@@ -5,7 +5,6 @@ import com.challenge.disney.modelos.Personaje;
 import com.sun.istack.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -18,4 +17,5 @@ public interface PersonajeServicio {
     ResponseEntity<Object> nuevoPersonaje(PersonajeDTO personajeDTO);
     ResponseEntity<Object> modificarPersonaje (long id, PersonajeDTO personajeDTO);
     ResponseEntity<Object> eliminarPersonaje (long id);
+    List<PersonajeDTO> buscarPersonaje (String campo, String name);
 }

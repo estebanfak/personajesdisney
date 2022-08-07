@@ -1,11 +1,11 @@
 package com.challenge.disney.controladores;
 
 import com.challenge.disney.dtos.GeneroDTO;
+import com.challenge.disney.modelos.Genero;
 import com.challenge.disney.servicios.GeneroServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +19,11 @@ public class GeneroControlador {
     public List<GeneroDTO> getAll(){
         return generoServicio.getAll();
     }
+//----------------------------------------Modificar un personaje--------------------------------------------------------
+    @PostMapping("/genero")
+    public ResponseEntity<Object> crearGenero(@RequestBody GeneroDTO generoDTO){
+        return generoServicio.crearGenero(generoDTO);
+    }
+//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------Modificar un personaje--------------------------------------------------------
 }

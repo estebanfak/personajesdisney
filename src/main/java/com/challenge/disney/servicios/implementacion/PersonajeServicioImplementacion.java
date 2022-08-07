@@ -1,27 +1,29 @@
 package com.challenge.disney.servicios.implementacion;
 
 import com.challenge.disney.dtos.PersonajeDTO;
+import com.challenge.disney.modelos.Pelicula;
 import com.challenge.disney.modelos.Personaje;
-import com.challenge.disney.modelos.PersonajePelicula;
+import com.challenge.disney.repositorios.PeliculaRepositorio;
 import com.challenge.disney.repositorios.PersonajePeliculaRepositorio;
 import com.challenge.disney.repositorios.PersonajeRepositorio;
 import com.challenge.disney.servicios.PersonajeServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.challenge.disney.utiles.utiles.modificarPalabras;
+
 @Service
 public class PersonajeServicioImplementacion implements PersonajeServicio {
     @Autowired
     private PersonajeRepositorio personajeRepositorio;
     @Autowired
     private PersonajePeliculaRepositorio personajePeliculaRepositorio;
+    @Autowired
+    private PeliculaRepositorio peliculaRepositorio;
 
     @Override
     public List<PersonajeDTO> getAll() {
@@ -101,4 +103,27 @@ public class PersonajeServicioImplementacion implements PersonajeServicio {
         personajeRepositorio.deleteById(id);
         return ResponseEntity.accepted().body("Personaje eliminado");
     }
+
+    @Override
+    public List<PersonajeDTO> buscarPersonaje(String campo, String param) {
+        if(param.isBlank() || param.isEmpty() || param.equals(" ") || campo.isBlank() || campo.isEmpty() || campo.equals(" ")){
+            return personajeRepositorio.findAll().stream().map(PersonajeDTO::new).collect(Collectors.toList());
+        }
+        if(campo.toLowerCase().equals("name")){
+            String paramName = modificarPalabras(param);
+        return personajeRepositorio.findAll().stream().filter(element -> modificarPalabras(element.getNombre()).contains(paramName)).map(PersonajeDTO::new).collect(Collectors.toList());
+        }
+        if(campo.toLowerCase().equals("age")){
+            int paramAge = Integer.parseInt(param);
+            return personajeRepositorio.findAll().stream().filter(element -> element.getEdad() == paramAge).map(PersonajeDTO::new).collect(Collectors.toList());
+        }
+        if(campo.toLowerCase().equals("movies")){
+            long paramId = Long.parseLong(param);
+            Pelicula pelicula = peliculaRepositorio.findById(paramId).orElse(null);
+            assert pelicula != null;
+            return  pelicula.getPersonaje().stream().map(PersonajeDTO::new).collect(Collectors.toList());
+        }
+        return null;
+    }
+
 }

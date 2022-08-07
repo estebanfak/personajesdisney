@@ -1,15 +1,12 @@
 package com.challenge.disney.controladores;
 
 import com.challenge.disney.dtos.PersonajeDTO;
-import com.challenge.disney.modelos.Personaje;
 import com.challenge.disney.servicios.PersonajeServicio;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 @Validated
 @RestController
@@ -30,15 +27,15 @@ public class PersonajeControlador {
     }
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Crear nuevo personaje---------------------------------------------------------
-    @PostMapping("/personajes")   // TODO --> PERSONaje como objeto  jeropaaa
-    public ResponseEntity<Object> nuevoPersonaje(@RequestBody(required = true) @NotNull PersonajeDTO personajeDTO) throws Exception {
+    @PostMapping("/personajes")
+    public ResponseEntity<Object> nuevoPersonaje(@RequestBody(required = true) @NotNull PersonajeDTO personajeDTO){
         return personajeServicio.nuevoPersonaje(personajeDTO);
     }
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Modificar un personaje--------------------------------------------------------
     @PatchMapping("/personajes/{id}")
     public ResponseEntity<Object> modificarPersonaje (@PathVariable long id,
-                                                      @RequestBody(required = true) @NotNull PersonajeDTO personajeDTO) throws Exception {
+                                                      @RequestBody(required = true) @NotNull PersonajeDTO personajeDTO){
         return personajeServicio.modificarPersonaje(id, personajeDTO);
     }
 //----------------------------------------------------------------------------------------------------------------------
@@ -48,4 +45,10 @@ public class PersonajeControlador {
         return personajeServicio.eliminarPersonaje(id);
     }
 //----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------Buscar un personaje-----------------------------------------------------------
+    @GetMapping("/characters/{campo}/{param}")
+    public List<PersonajeDTO> buscarPersonaje (@PathVariable(value = "campo") String campo,
+                                               @PathVariable(value = "param") String param){
+        return personajeServicio.buscarPersonaje(campo, param);
+    }
 }

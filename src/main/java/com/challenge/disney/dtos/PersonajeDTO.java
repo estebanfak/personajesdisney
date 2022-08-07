@@ -17,7 +17,6 @@ public class PersonajeDTO {
 
     public PersonajeDTO() {
     }
-
     public PersonajeDTO(Personaje personaje) {
         this.id = personaje.getId();
         this.imagen = personaje.getImagen();

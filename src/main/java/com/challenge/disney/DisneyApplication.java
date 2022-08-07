@@ -67,7 +67,7 @@ public class DisneyApplication {
 			personajePeliculaRepositorio.save(personajePelicula5);
 
 			GeneroPelicula generoPelicula1 = new GeneroPelicula(genero1, pelicula1);
-			GeneroPelicula generoPelicula2 = new GeneroPelicula(genero2, pelicula2);
+			GeneroPelicula generoPelicula2 = new GeneroPelicula(genero1, pelicula2);
 			GeneroPelicula generoPelicula3 = new GeneroPelicula(genero3, pelicula3);
 			GeneroPelicula generoPelicula4 = new GeneroPelicula(genero4, pelicula4);
 			GeneroPelicula generoPelicula5 = new GeneroPelicula(genero5, pelicula1);
