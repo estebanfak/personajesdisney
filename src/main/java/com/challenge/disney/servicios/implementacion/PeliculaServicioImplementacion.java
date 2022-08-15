@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.challenge.disney.utiles.utiles.modificarPalabras;
@@ -116,12 +115,20 @@ public class PeliculaServicioImplementacion implements PeliculaServicio {
             long paramId = Long.parseLong(param);
             Genero genero = generoRepositorio.findById(paramId).orElse(null);
             assert genero != null;
-//            Set<GeneroPelicula> pelis = genero.getGeneroPeliculas();
             List<PeliculaDTO> listaPelisPorGenero = new ArrayList<>();
             genero.getGeneroPeliculas().forEach(generos -> listaPelisPorGenero.add(new PeliculaDTO(peliculaRepositorio.findByTitulo(generos.getPelicula().getTitulo()))));
-
             return listaPelisPorGenero;
-
+        }
+        if(campo.toLowerCase().equals("order")){
+            List<PeliculaDTO> listaOrdenada = peliculaRepositorio.findAll().stream().map(PeliculaDTO::new).sorted(Comparator.comparing(PeliculaDTO::getTitulo)).collect(Collectors.toList());
+            if(param.toLowerCase().equals("asc")){
+                return listaOrdenada;
+            }
+            if(param.toLowerCase().equals("desc")){
+                Collections.reverse(listaOrdenada);
+                return listaOrdenada;
+            }
+            return peliculaRepositorio.findAll().stream().map(PeliculaDTO::new).collect(Collectors.toList());
         }
         return null;
     }

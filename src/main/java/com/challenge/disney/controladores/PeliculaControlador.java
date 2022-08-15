@@ -14,12 +14,11 @@ import java.util.List;
 public class PeliculaControlador {
     @Autowired
     private PeliculaServicio peliculaServicio;
-
+//----------------------------------------Todas las peliculas-----------------------------------------------------------
     @GetMapping("/peliculas")
     public List<PeliculaDTO> gelAll(){
         return peliculaServicio.gelAll();
     }
-
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Crear nueva pelicula----------------------------------------------------------
     @PostMapping("/peliculas")
@@ -55,14 +54,12 @@ public class PeliculaControlador {
     }
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Eliminar personaje de una pelicula--------------------------------------------
-@DeleteMapping("movies/{idMovie}/characters/{idCharacter}")
+    @DeleteMapping("movies/{idMovie}/characters/{idCharacter}")
     public ResponseEntity<Object> eliminarPersonajeAPelicula (@PathVariable long idMovie,
                                                              @PathVariable long idCharacter){
         return peliculaServicio.eliminarPersonajeAPelicula(idMovie, idCharacter);
     }
 //----------------------------------------------------------------------------------------------------------------------
-    // TODO -> 10.Autenticación de Usuarios
-
     // TODO -> 11. Envío de emails
 
     // TODO -> Documentación

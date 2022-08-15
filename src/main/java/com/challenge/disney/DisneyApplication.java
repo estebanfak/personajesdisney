@@ -2,10 +2,13 @@ package com.challenge.disney;
 
 import com.challenge.disney.modelos.*;
 import com.challenge.disney.repositorios.*;
+import com.challenge.disney.servicios.EmailSenderServicio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -15,12 +18,18 @@ public class DisneyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DisneyApplication.class, args);
-	}
 
+	}
+	@Autowired
+	public PasswordEncoder passwordEncoder;
+	@Autowired
+	private EmailSenderServicio emailSenderServicio;
 	@Bean
-	public CommandLineRunner initData(PersonajeRepositorio personajeRepositorio, PeliculaRepositorio peliculaRepositorio, GeneroRepositorio generoRepositorio, PersonajePeliculaRepositorio personajePeliculaRepositorio, GeneroPeliculaRepositorio generoPeliculaRepositorio){
+	public CommandLineRunner initData(PersonajeRepositorio personajeRepositorio, PeliculaRepositorio peliculaRepositorio, GeneroRepositorio generoRepositorio, PersonajePeliculaRepositorio personajePeliculaRepositorio, GeneroPeliculaRepositorio generoPeliculaRepositorio, UsuarioRepositorio usuarioRepositorio){
 		return (args) -> {
 
+			Usuario usuario = new Usuario("Esteban", "Casile", "esteban@gmail.com", passwordEncoder.encode("123"));
+			usuarioRepositorio.save(usuario);
 			Personaje personaje1 = new Personaje("www.algo.com", "Cenicienta", "Se durmió", 21, 50);
 			Personaje personaje2 = new Personaje("www.algo1.com", "Ariel", "Es un pescado", 28, 55);
 			Personaje personaje3 = new Personaje("www.algo2.com", "Mulan", "India", 25, 52);
@@ -77,6 +86,9 @@ public class DisneyApplication {
 			generoPeliculaRepositorio.save(generoPelicula3);
 			generoPeliculaRepositorio.save(generoPelicula4);
 			generoPeliculaRepositorio.save(generoPelicula5);
+
+
+
 
 
 

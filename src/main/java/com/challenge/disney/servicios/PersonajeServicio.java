@@ -2,9 +2,7 @@ package com.challenge.disney.servicios;
 
 import com.challenge.disney.dtos.PersonajeDTO;
 import com.challenge.disney.modelos.Personaje;
-import com.sun.istack.NotNull;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
