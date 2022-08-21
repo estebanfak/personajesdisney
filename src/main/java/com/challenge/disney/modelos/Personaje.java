@@ -22,7 +22,7 @@ public class Personaje {
     public Personaje() {
     }
 
-    public Personaje(String imagen, String nombre, String historia, int edad, double peso) {
+    public Personaje(String nombre, String imagen, String historia, int edad, double peso) {
         this.imagen = imagen;
         this.nombre = nombre;
         this.historia = historia;

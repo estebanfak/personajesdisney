@@ -1,0 +1,35 @@
+[33mcommit 6caa03dd1ff1632cab14e3e84fd2ce0572e03605[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: estebanfak <estebanfak@gmail.com>
+Date:   Mon Aug 15 14:56:47 2022 -0300
+
+    agregue usuario, implemente autenticacion, servicio de email
+
+[33mcommit 9578082a6ad66a3b653f6c66a05859cbf3879eca[m
+Author: estebanfak <estebanfak@gmail.com>
+Date:   Sun Aug 7 13:53:54 2022 -0300
+
+    agregue casi toodo hasta la tarea 9 del challenge
+
+[33mcommit 2f58cfa75317c7e95667dc558af8373ab4eaa303[m
+Author: estebanfak <estebanfak@gmail.com>
+Date:   Thu Aug 4 00:41:16 2022 -0300
+
+    cambios en controlador, servicios e implementacion de servicios de personajes, opción de crear, modificar, y eliminar personajes
+
+[33mcommit 13f7aee2bcecb5e50e1a11588bab253d730543bc[m
+Author: estebanfak <estebanfak@gmail.com>
+Date:   Thu Jul 21 14:47:05 2022 -0300
+
+    agregue DTO de generoPelicula, PersonajePelicula, modelo de GeneroPelicula y su repositorio, modifique DTOs y modelos
+
+[33mcommit b80650c4ec2f97e03fbd365e84e5d7d3c0396d14[m
+Author: estebanfak <estebanfak@gmail.com>
+Date:   Wed Jul 20 20:39:44 2022 -0300
+
+    agregue genero, relacion personaje pelicula
+
+[33mcommit 8e52eaf0f44ec0ef978ab9b40c48ed2511530350[m
+Author: estebanfak <estebanfak@gmail.com>
+Date:   Tue Jul 19 15:34:51 2022 -0300
+
+    primer commit1

@@ -1,11 +1,13 @@
 package com.challenge.disney.modelos;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Usuario {
@@ -13,16 +15,19 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
-    private String nombre, apellido, email, contraseña;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private String contrasena;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String contraseña) {
+    public Usuario(String nombre, String apellido, String email, String contrasena) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
     }
 
     public Long getId() {
@@ -46,10 +51,10 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

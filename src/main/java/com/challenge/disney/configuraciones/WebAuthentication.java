@@ -24,7 +24,7 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
         auth.userDetailsService(usuarioEmail -> {
             Usuario usuario = usuarioRepositorio.findByEmail(usuarioEmail);
             if (usuario != null) {
-                return new User(usuario.getEmail(), usuario.getContraseña(), AuthorityUtils.createAuthorityList("USUARIO"));
+                return new User(usuario.getEmail(), usuario.getContrasena(), AuthorityUtils.createAuthorityList("USUARIO"));
             } else {
                 throw new UsernameNotFoundException("Usuario no registrado: " + usuarioEmail);
             }

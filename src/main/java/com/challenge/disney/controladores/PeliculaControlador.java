@@ -60,8 +60,6 @@ public class PeliculaControlador {
         return peliculaServicio.eliminarPersonajeAPelicula(idMovie, idCharacter);
     }
 //----------------------------------------------------------------------------------------------------------------------
-    // TODO -> 11. Envío de emails
-
     // TODO -> Documentación
 
     // TODO -> Tests

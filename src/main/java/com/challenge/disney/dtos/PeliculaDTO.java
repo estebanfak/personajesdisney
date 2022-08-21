@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class PeliculaDTO {
     private Long id;
     private String imagen, titulo;
-    private LocalDate fechaCreacion;
+    private int fechaCreacion;
     private byte calificacion;
     private Set<String> personajes = new HashSet<>();
     private Set<String> generos = new HashSet<>();
@@ -36,7 +36,7 @@ public class PeliculaDTO {
     public String getTitulo() {
         return titulo;
     }
-    public LocalDate getFechaCreacion() {
+    public int getFechaCreacion() {
         return fechaCreacion;
     }
     public byte getCalificacion() {

@@ -23,8 +23,9 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	// TODO -> implementacion de mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+//	implementation 'org.hibernate.validator:hibernate-validator:7.0.4.Final'
+	implementation "org.hibernate.validator:hibernate-validator:6.0.13.Final"
 }
 
 tasks.named('test') {

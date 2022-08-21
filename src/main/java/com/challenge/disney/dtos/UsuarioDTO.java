@@ -4,7 +4,7 @@ import com.challenge.disney.modelos.Usuario;
 
 public class UsuarioDTO {
     private Long id;
-    private String nombre, apellido, email, contraseña;
+    private String nombre, apellido, email, contrasena;
 
     public UsuarioDTO() {}
 
@@ -13,7 +13,7 @@ public class UsuarioDTO {
         this.nombre = usuario.getNombre();
         this.apellido = usuario.getApellido();
         this.email = usuario.getEmail();
-        this.contraseña = usuario.getContraseña();
+        this.contrasena = usuario.getContrasena();
     }
 
     public Long getId() {
@@ -28,7 +28,7 @@ public class UsuarioDTO {
     public String getEmail() {
         return email;
     }
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 }

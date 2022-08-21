@@ -15,7 +15,8 @@ public class Pelicula {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
     private String imagen, titulo;
-    private LocalDate fechaCreacion;
+    private int fechaCreacion;
+
     private byte calificacion;
     @OneToMany(mappedBy="pelicula", fetch=FetchType.EAGER)
     private Set<PersonajePelicula> personajePeliculas = new HashSet<>();
@@ -26,7 +27,7 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(String imagen, String titulo, LocalDate fechaCreacion, byte calificacion) {
+    public Pelicula(String imagen, String titulo, int fechaCreacion, byte calificacion) {
         this.imagen = imagen;
         this.titulo = titulo;
         this.fechaCreacion = fechaCreacion;
@@ -48,10 +49,10 @@ public class Pelicula {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    public LocalDate getFechaCreacion() {
+    public int getFechaCreacion() {
         return fechaCreacion;
     }
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(int fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
     public byte getCalificacion() {

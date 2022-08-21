@@ -1,10 +1,7 @@
 package com.challenge.disney.servicios.implementacion;
 
 import com.challenge.disney.dtos.PeliculaDTO;
-import com.challenge.disney.modelos.Genero;
-import com.challenge.disney.modelos.Pelicula;
-import com.challenge.disney.modelos.Personaje;
-import com.challenge.disney.modelos.PersonajePelicula;
+import com.challenge.disney.modelos.*;
 import com.challenge.disney.repositorios.*;
 import com.challenge.disney.servicios.PeliculaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,7 @@ public class PeliculaServicioImplementacion implements PeliculaServicio {
     public ResponseEntity<Object> nuevaPelicula(PeliculaDTO peliculaDTO) {
         if( peliculaDTO.getImagen().isBlank() ||
             peliculaDTO.getTitulo().isBlank() ||
-            peliculaDTO.getFechaCreacion() == null ||
+            peliculaDTO.getFechaCreacion() <= 0 ||
             peliculaDTO.getCalificacion()<0){
             return ResponseEntity.badRequest().body("Faltan datos");
         }
@@ -46,12 +43,23 @@ public class PeliculaServicioImplementacion implements PeliculaServicio {
 
         if(peliculaDTO.getPersonajes().size()>0){
             peliculaDTO.getPersonajes().forEach(element -> {
-                System.out.println(element);
+                System.out.println(modificarPalabras(element));
                 if(personajeRepositorio.findByNombre((element)) != null){
                     PersonajePelicula personajePelicula = new PersonajePelicula();
                     personajePelicula.setPelicula(pelicula);
                     personajePelicula.setPersonaje(personajeRepositorio.findByNombre(element));
                     personajePeliculaRepositorio.save(personajePelicula);
+                }
+            });
+        }
+        if(peliculaDTO.getGeneros().size()>0){
+            peliculaDTO.getGeneros().forEach(genero -> {
+                System.out.println(genero);
+                if(generoRepositorio.findByNombre(genero) != null){
+                    GeneroPelicula generoPelicula = new GeneroPelicula();
+                    generoPelicula.setGenero(generoRepositorio.findByNombre(genero));
+                    generoPelicula.setPelicula(pelicula);
+                    generoPeliculaRepositorio.save(generoPelicula);
                 }
             });
         }
@@ -71,7 +79,7 @@ public class PeliculaServicioImplementacion implements PeliculaServicio {
         if(!peliculaDTO.getTitulo().isBlank()){
             pelicula.setTitulo(peliculaDTO.getTitulo());
         }
-        if(peliculaDTO.getFechaCreacion() != null){
+        if(peliculaDTO.getFechaCreacion() <= 0){
             pelicula.setFechaCreacion(peliculaDTO.getFechaCreacion());
         }
         if(String.valueOf(peliculaDTO.getCalificacion()).isBlank()){

@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Email;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,17 +36,17 @@ public class UsuarioServicioImplementacion implements UsuarioServicio {
 
     @Override
     public ResponseEntity<Object> crearUsuario(UsuarioDTO usuarioDTO) {
-        if(usuarioDTO.getEmail().isBlank() && usuarioDTO.getNombre().isBlank() && usuarioDTO.getApellido().isBlank() && usuarioDTO.getContraseña().isBlank()){
+
+        if(usuarioDTO.getEmail().isBlank() && usuarioDTO.getNombre().isBlank() && usuarioDTO.getApellido().isBlank() && usuarioDTO.getContrasena().isBlank()){
             return ResponseEntity.badRequest().body("Datos inválidos");
         }
         if(usuarioRepositorio.findByEmail(usuarioDTO.getEmail()) != null){
             return ResponseEntity.badRequest().body("Usuario ya registrado");
         }
-        Usuario usuario = new Usuario(usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), passwordEncoder.encode(usuarioDTO.getContraseña()));
+        Usuario usuario = new Usuario(usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), passwordEncoder.encode(usuarioDTO.getContrasena()));
         usuarioRepositorio.save(usuario);
         emailSenderServicio.sendEmail(usuario.getEmail(), "Bienvenido",
-                "<p>Bienvenido usuario: </p>" + usuario.getNombre() +
-                "<p>Use el siguiente enlace para confirmar su registro: </p>" + "<a>enlace</a>");
+                "¡Hola " + usuario.getNombre() + "! Bienvenido a Disney Aplication");
 
         return ResponseEntity.accepted().body("Usuario creado satisfactoriamente");
     }
