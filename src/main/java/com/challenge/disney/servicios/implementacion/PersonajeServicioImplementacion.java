@@ -61,7 +61,7 @@ public class PersonajeServicioImplementacion implements PersonajeServicio {
         }
         Personaje personaje = new Personaje(personajeDTO.getImagen(), personajeDTO.getNombre(), personajeDTO.getHistoria(), personajeDTO.getEdad(), personajeDTO.getPeso());
         personajeRepositorio.save(personaje);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.accepted().body(personaje);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class PersonajeServicioImplementacion implements PersonajeServicio {
             personaje.setPeso(personajeDTO.getPeso());
         }
         personajeRepositorio.save(personaje);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.accepted().body(personaje);
     }
 
     @Override
@@ -105,25 +105,36 @@ public class PersonajeServicioImplementacion implements PersonajeServicio {
     }
 
     @Override
-    public List<PersonajeDTO> buscarPersonaje(String campo, String param) {
+    public ResponseEntity<?> buscarPersonaje(String campo, String param) {
         if(param.isBlank() || param.isEmpty() || param.equals(" ") || campo.isBlank() || campo.isEmpty() || campo.equals(" ")){
-            return personajeRepositorio.findAll().stream().map(PersonajeDTO::new).collect(Collectors.toList());
+            return ResponseEntity.ok(personajeRepositorio.findAll().stream().map(PersonajeDTO::new).collect(Collectors.toList()));
         }
         if(campo.toLowerCase().equals("name")){
             String paramName = modificarPalabras(param);
-        return personajeRepositorio.findAll().stream().filter(element -> modificarPalabras(element.getNombre()).contains(paramName)).map(PersonajeDTO::new).collect(Collectors.toList());
+            List<PersonajeDTO> lista = personajeRepositorio.findAll().stream().filter(element -> modificarPalabras(element.getNombre()).contains(paramName)).map(PersonajeDTO::new).collect(Collectors.toList());
+            if (lista.size()==0){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.accepted().body(personajeRepositorio.findAll().stream().filter(element -> modificarPalabras(element.getNombre()).contains(paramName)).map(PersonajeDTO::new).collect(Collectors.toList()));
         }
         if(campo.toLowerCase().equals("age")){
             int paramAge = Integer.parseInt(param);
-            return personajeRepositorio.findAll().stream().filter(element -> element.getEdad() == paramAge).map(PersonajeDTO::new).collect(Collectors.toList());
+            List<PersonajeDTO> lista = personajeRepositorio.findAll().stream().filter(element -> element.getEdad() == paramAge).map(PersonajeDTO::new).collect(Collectors.toList());
+            if(lista.size()==0){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(personajeRepositorio.findAll().stream().filter(element -> element.getEdad() == paramAge).map(PersonajeDTO::new).collect(Collectors.toList()));
         }
         if(campo.toLowerCase().equals("movies")){
             long paramId = Long.parseLong(param);
             Pelicula pelicula = peliculaRepositorio.findById(paramId).orElse(null);
-            assert pelicula != null;
-            return  pelicula.getPersonaje().stream().map(PersonajeDTO::new).collect(Collectors.toList());
+            if(pelicula==null){
+                return ResponseEntity.badRequest().body("La pelicula con el id: '" + paramId + "', no existe");
+            }
+
+            return ResponseEntity.ok(pelicula.getPersonaje().stream().map(PersonajeDTO::new).collect(Collectors.toList()));
         }
-        return null;
+        return ResponseEntity.internalServerError().body(personajeRepositorio.findAll());
     }
 
 }

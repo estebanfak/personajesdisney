@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class PeliculaControlador {
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Eliminar una pelicula---------------------------------------------------------
     @DeleteMapping("/peliculas/{id}")
-    public ResponseEntity<Object> eliminarPelicula (@PathVariable long id){
+    public ResponseEntity<Object> eliminarPelicula (@PathVariable long id) throws Exception{
         return peliculaServicio.eliminarPelicula(id);
     }
 //----------------------------------------------------------------------------------------------------------------------

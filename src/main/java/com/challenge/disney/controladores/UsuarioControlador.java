@@ -19,7 +19,7 @@ public class UsuarioControlador {
     private UsuarioServicio usuarioServicio;
 //----------------------------------------Usuario autenticado-----------------------------------------------------------
     @GetMapping("/usuario/actual")
-    public UsuarioDTO getUsuario(Authentication authentication) {
+    public UsuarioDTO getUsuario(Authentication authentication){
         return usuarioServicio.getUsuario(authentication);
     }
 //----------------------------------------------------------------------------------------------------------------------
@@ -29,9 +29,15 @@ public class UsuarioControlador {
         return usuarioServicio.getUsuarios();
     }
 //----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------Buscar usuario por id---------------------------------------------------------
+    @GetMapping("/usuario/{id}")
+    public UsuarioDTO getUsuarioId(@PathVariable("id") long id) {
+        return usuarioServicio.getUsuariosPorId(id);
+    }
+//----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Crear nuevo usuario-----------------------------------------------------------
     @PostMapping("/usuarios")
-    public ResponseEntity<Object> crearUsuario(@RequestBody UsuarioDTO usuarioDTO){
+    public ResponseEntity<?> crearUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return usuarioServicio.crearUsuario(usuarioDTO);
     }
 //----------------------------------------------------------------------------------------------------------------------

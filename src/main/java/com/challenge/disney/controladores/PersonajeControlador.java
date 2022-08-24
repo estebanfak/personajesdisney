@@ -28,7 +28,7 @@ public class PersonajeControlador {
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Crear nuevo personaje---------------------------------------------------------
     @PostMapping("/personajes")
-    public ResponseEntity<Object> nuevoPersonaje(@RequestBody(required = true) @NotNull PersonajeDTO personajeDTO){
+    public ResponseEntity<Object> nuevoPersonaje(@RequestBody(required = true) PersonajeDTO personajeDTO){
         return personajeServicio.nuevoPersonaje(personajeDTO);
     }
 //----------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ public class PersonajeControlador {
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------Buscar un personaje-----------------------------------------------------------
     @GetMapping("/characters/{campo}/{param}")
-    public List<PersonajeDTO> buscarPersonaje (@PathVariable(value = "campo") String campo,
+    public ResponseEntity<?> buscarPersonaje (@PathVariable(value = "campo") String campo,
                                                @PathVariable(value = "param") String param){
         return personajeServicio.buscarPersonaje(campo, param);
     }

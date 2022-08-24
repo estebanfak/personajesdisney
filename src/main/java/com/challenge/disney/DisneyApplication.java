@@ -40,6 +40,7 @@ public class DisneyApplication {
 			Usuario usuario = new Usuario("Esteban", "Fak", "esteban@gmail.com", passwordEncoder.encode("123"));
 			usuarioRepositorio.save(usuario);
 
+			
 
 			Personaje personaje1=new Personaje("Cenicienta", "https://album.mediaset.es/eimg/2018/03/02/KPb7rTBoxkYWcRCz6IapJ.jpg?w=1024", "Cenicienta", 19, 50);
 			Personaje personaje2=new Personaje("Dumbo", "imagen", "Dumbo", 2, 50);

@@ -15,5 +15,5 @@ public interface PersonajeServicio {
     ResponseEntity<Object> nuevoPersonaje(PersonajeDTO personajeDTO);
     ResponseEntity<Object> modificarPersonaje (long id, PersonajeDTO personajeDTO);
     ResponseEntity<Object> eliminarPersonaje (long id);
-    List<PersonajeDTO> buscarPersonaje (String campo, String name);
+    ResponseEntity<?> buscarPersonaje (String campo, String name);
 }

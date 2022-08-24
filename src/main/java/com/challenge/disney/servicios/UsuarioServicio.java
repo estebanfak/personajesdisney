@@ -9,5 +9,7 @@ import java.util.List;
 public interface UsuarioServicio {
     UsuarioDTO getUsuario(Authentication authentication);
     List<UsuarioDTO> getUsuarios();
-    ResponseEntity<Object> crearUsuario(UsuarioDTO usuarioDTO);
+    ResponseEntity<?> crearUsuario(UsuarioDTO usuarioDTO);
+
+    UsuarioDTO getUsuariosPorId(long id);
 }

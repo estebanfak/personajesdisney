@@ -1,8 +1,6 @@
 package com.challenge.disney.dtos;
 
 import com.challenge.disney.modelos.Pelicula;
-
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;

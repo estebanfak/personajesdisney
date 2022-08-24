@@ -63,7 +63,7 @@ public class PeliculaServicioImplementacion implements PeliculaServicio {
                 }
             });
         }
-        return ResponseEntity.accepted().body("Pelicula creada");
+        return ResponseEntity.accepted().body(pelicula);
     }
 
     @Override
@@ -86,15 +86,15 @@ public class PeliculaServicioImplementacion implements PeliculaServicio {
             pelicula.setCalificacion(peliculaDTO.getCalificacion());
         }
         peliculaRepositorio.save(pelicula);
-        return ResponseEntity.accepted().body("Pelicula modificada");
+        return ResponseEntity.accepted().body(pelicula);
     }
 
     @Override
-    public ResponseEntity<Object> eliminarPelicula(long id) {
+    public ResponseEntity<Object> eliminarPelicula(long id) throws Exception{
         Pelicula pelicula = peliculaRepositorio.findById(id).orElse(null);
-        if(pelicula == null){
-            return ResponseEntity.badRequest().body("Pelicula Inexistente");
-        }
+//        if(pelicula == null){
+//            return ResponseEntity.badRequest().body("Pelicula Inexistente");
+//        }
 
         if(pelicula.getPersonajePeliculas().size()>0){
             pelicula.getPersonajePeliculas().forEach(element ->{
